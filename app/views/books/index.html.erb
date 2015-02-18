@@ -14,17 +14,20 @@
   </thead>
 
   <tbody>
+
     <% @books.each do |book| %>
-      <tr>
+      <tr class='<%= "finished" if book.finished? %>'>
+        
         <td><%= book.title %></td>
         <td><%= book.author %></td>
         <td><%= book.description %></td>
-        <td><%= book.amazon_id %></td>
+        <td><%= image_from_amazon(book.amazon_id)%></td>
         <td><%= link_to 'Show', book %></td>
         <td><%= link_to 'Edit', edit_book_path(book) %></td>
         <td><%= link_to 'Destroy', book, method: :delete, data: { confirm: 'Are you sure?' } %></td>
       </tr>
     <% end %>
+
   </tbody>
 </table>
 
