@@ -5,7 +5,8 @@ class Book < ActiveRecord::Base
 
   #"recent" scope implementation is...
 
-  scope :search,->(keyword){where(title: keyword) if keyword.present?}
+ # scope :search,->(keyword){where(title: keyword) if keyword.present?}
+  scope :search,->(keyword){where('keywords LIKE ?',"%#{keyword.downcase}%") if keyword.present?}
 
   #The difference btw scope and class method is that scope always returns a collection.Scope will not return 'nil'.
 
@@ -17,6 +18,8 @@ class Book < ActiveRecord::Base
     #end
  # end
 
+  before_save :set_keywords
+
   def self.recent
     where('finished_on > ?',2.days.ago)
   end
@@ -25,3 +28,10 @@ class Book < ActiveRecord::Base
     finished_on.present?
   end
 end
+
+
+
+ def set_keywords
+   #self.keywords=[title,author,description].map {|p| p.downcase}.join(' ')
+   self.keywords = [title, author, description].map(&:downcase).join(' ')
+ end
