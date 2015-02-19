@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150218115507) do
+ActiveRecord::Schema.define(version: 20150219054211) do
 
   create_table "books", force: :cascade do |t|
     t.string   "title"
@@ -23,6 +23,15 @@ ActiveRecord::Schema.define(version: 20150218115507) do
     t.integer  "rating"
     t.date     "finished_on"
     t.text     "keywords"
+    t.integer  "genre_id"
+  end
+
+  add_index "books", ["genre_id"], name: "index_books_on_genre_id"
+
+  create_table "genres", force: :cascade do |t|
+    t.string   "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
 end
