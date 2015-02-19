@@ -11,7 +11,7 @@ Book.create!([{
                   amazon_id: "0553283685",
                   rating:5,
                   finished_on: 1.days.ago,
-                  genre: fiction
+                  genres: [fiction]
               },
 
               {
@@ -21,7 +21,7 @@ Book.create!([{
                   amazon_id: "1250040906",
                   rating:4,
                   finished_on: 10.days.ago,
-                  genre: non_fiction
+                  genres: [non_fiction]
               },
 
               {
@@ -31,7 +31,7 @@ Book.create!([{
                   amazon_id: "1500805505",
                   rating:5,
                   finished_on: nil,
-                  genre: non_fiction
+                  genres: [non_fiction]
               }])
 
 p "Created #{Book.count} books"
